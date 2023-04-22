@@ -1,74 +1,77 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Flask Form</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-      h1 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      form > div {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 10px;
-      }
-      label {
-        margin-bottom: 5px;
-      }
-      input {
-        padding: 5px;
-        font-size: 1rem;
-      }
-      button {
-        background-color: #008cba;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 1rem;
-        margin: 10px 2px;
-        cursor: pointer;
-        border-radius: 5px;
-      }
-      p {
-        font-size: 1.1rem;
-        text-align: center;
-        margin-top: 20px;
-      }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            padding-top: 50px;
+        }
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 100%;
+        }
+        .info-box {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
     </style>
-  </head>
-  <body>
-    <h1>Enter Your Name</h1>
-    <form method="POST" action="/">
-      {{ form.csrf_token }}
-      <div>
-        <label for="{{ form.first_name.id }}">First Name:</label>
-        {{ form.first_name() }}
-      </div>
-      <div>
-        <label for="{{ form.last_name.id }}">Last Name:</label>
-        {{ form.last_name() }}
-      </div>
-      <div>
-        {{ form.submit() }}
-      </div>
-    </form>
-    {% if response %}
-      <p>{{ response }}</p>
-    {% endif %}
-  </body>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK8AAACDCAMAAADMIrsKAAAArlBMVEX///8Aif8Ae/8AjP8Akf8Ah/8Ahf8Aj/8AlP8Alv8Ag/8AmP8Aff8Aef8AgP8Ad//O5P8AaP/O3f8AdP8ApP8Anv/Y5P8AqP8Aof8Am//k8f+83f8Acf/v9v8Abf/c7P+QuP9Hsv+cyv+g0f9vtf+Fvv+PxP9dqP9vsf+t0/9Lnv+ozv9dpP+Vvv+ryf9QmP9Bjv+CrP9vof8AYv+Msv/D1//E5/9euP9wv/9Jh/8NCzc4AAADaElEQVR4nO2b6XKqMBSAgQAqYqLiimwqWtui2MW29/1f7AIWFIQO6pjAzPl+kZzM+HkM2UCOAwAAAAAAAAAAAIDaYNs2a4Ur+Pqej+fftTFeDschwyVrkXJ8DcZHBjprlVL8JL5r1iplMOeJ77fJWqYE+jjxndfB9zy/rF1KsZwMjkzqMUCYg6PwcMzapCT6OBSe1OJui5gNJwH1GH1DIt8h+D6K2vlOhwHg+yjA97HM2tMA8H0UkW+7kr5mN4dFO2SWF2K6ptAXE9TIoRn5inkhNFkwy/tyKrba19ISp4yWxS66WvYIclnorsTWrYgr+roLdLNuq4UWtHVNsXmHb1OkPU6sG817aFA+SjGfxLt8xSe6CbbFO31FuqeXI0lME8wEDbGIIJYNSiOWvg3kue6mhXJtUWvjul7m68iUfeV0cp/D7mi72axHmXTDn958TqeYtq+SWhTEnXHFXywY+HhusFNLDYWhr5yM/uZLdv2DXpKBYCFXwxc1TyuudTbB/Gkm05uInS9GCbx3GktnEkoj9ZOY6fGnelwN334NfFHj1B8WF75n/aGBquGLX+PqVAqzyX/FDH1V/pw4wSuFz6LE45meqlYp+wrnHy6J3bDSzNENhaMMd0XpvFZg6ctLqrfdOgjn6PI8Rs5266kpXca+PC8riiLx+UhBTM7U0fbtSPfRAd8/fYl8H6QivhhjJSkoYcettK9q27aHY3ev2+3i/Ia0fTUlFxLEHPW3oDpBieQ31Krhq83Ce/G3EN5Ts6KG1fAVNkHQ0XBwiTUnuN4IFfHF+SjhzLzjiUb4XXDVVQra0fY1CjwEPwzb/UM/2tP5QkE7oyK+mJw2bMF2jhQ1o+xrY7WIzj7eUvT3ncJWmO75jukXqwgWdg6Hg4MtofhL+ZQPKB1S6BIYa4ZhaMW2qkocurqcSTrC7XQI9edEW+sOX2tLW5fj3oybdY03+rqc+d4jnVsgvXc2Tw3XqnW9MbFUZq9V2o780cuikRPaRfRDdpi+F6yP+mlGvpHoGv5FtHoPwUdnvnQn3Rv5tH51rU/WKqUwtZiavJC460W2vR1rkZKYeyvQtfY1SS/HHSLfA2uN8vg9reezlrgC27Ks2vxdJMT5cFgrXIX+r3oT2Z/UZmwAAAAAAAAAAAAAAAAAAAAAKsF/x0uCqMoX4mIAAAAASUVORK5CYII=" alt="Chatbot Logo">
+        </div>
+        <h1 class="text-center my-4">Enter Your Name</h1>
+        <form method="POST" action="/">
+          {{ form.csrf_token }}
+
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input class="form-control" id="first_name" name="first_name" required="" type="text" value="">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name:</label>
+                <input class="form-control" id="last_name" name="last_name" required="" type="text" value="">
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary" id="submit" name="submit" type="submit" value="Submit">
+            </div>
+        </form>
+
+        <div class="info-box">
+            <h2 class="text-center mb-4">Information</h2>
+            <p>From a usability standpoint, please enter only alphanumeric characters in the First Name and Last Name fields. Special characters, SQL commands, and scripts are not allowed and may result in a rejection of the input data.</p>
+        </div>
+        {% if response %}
+        <p>{{ response }}</p>
+      {% endif %}
+    </div>
+</body>
 </html>
+
+
+
+
+
+
